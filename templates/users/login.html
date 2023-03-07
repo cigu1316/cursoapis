@@ -38,6 +38,7 @@
                                         {% if errors %}
                                     <div class="alert alert-danger" role="alert">
                                         {{errors}}
+
                                     </div>
                                         {% endif %}
                                     <form action="/users/login/" method = "POST">
@@ -47,11 +48,11 @@
                                         
                                         <div class="form-group">
                                             <label class="mb-1"><strong>Username</strong></label>
-                                            <input type="text" class="form-control" value="username1" name="username">
+                                            <input type="text" class="form-control" value="" name="username">
                                         </div>
                                         <div class="form-group">
                                             <label class="mb-1"><strong>Password</strong></label>
-                                            <input type="password" class="form-control" value="Password" name="password">
+                                            <input type="password" class="form-control" value="" name="password">
                                         </div>
                                         <div class="text-center">
                                             <button type="submit" class="btn btn-primary btn-block">Sign Me In</button>
@@ -60,6 +61,7 @@
                                     <div class="new-account mt-3">
                                         <p>Don't have an account? <a class="text-primary" href="/users/register/">Sign up</a></p>
                                     </div>
+                                  
                                 </div>
                             </div>
                         </div>

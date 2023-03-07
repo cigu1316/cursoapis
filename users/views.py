@@ -3,6 +3,10 @@ from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import login, authenticate
 from users.forms import RegisterForm
 
+from django.db.models.signals import post_save
+from django.dispatch  import receiver
+from django.contrib.auth.models import User
+from users.models import UserProfile
 
 
 
@@ -41,3 +45,13 @@ def register(request):
                 }
             return render(request, 'users/register.html', context)
     
+def users_list_view(request):
+    return render(request, 'users/users_list.html')
+
+def users_profile_view(request):
+    return render(request, 'users/user_profile.html')
+
+@receiver(post_save, sender=User)
+def create_user_profile(sender, instance, created, **kwargs):
+    if created:
+        UserProfile.objects.create(user=instance)
