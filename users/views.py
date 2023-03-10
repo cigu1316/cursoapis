@@ -1,13 +1,13 @@
 from django.shortcuts import render ,redirect
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import login, authenticate
-from users.forms import RegisterForm
+from users.forms import RegisterForm , UserProfileForm
 
 from django.db.models.signals import post_save
 from django.dispatch  import receiver
 from django.contrib.auth.models import User
 from users.models import UserProfile
-
+from admin_settings.models import Language, Country
 
 
 def login_view(request):
@@ -45,11 +45,49 @@ def register(request):
                 }
             return render(request, 'users/register.html', context)
     
+
 def users_list_view(request):
     return render(request, 'users/users_list.html')
 
+ 
+    
+    
 def users_profile_view(request):
-    return render(request, 'users/user_profile.html')
+    if request.method == 'GET':
+        context = {
+            'languages': Language.objects.all(),
+            'countries': Country.objects.all(),
+        }
+        return render(request, 'users/user_profile.html', context=context)
+    elif request.method == 'POST':
+    
+        data = request.POST.copy()
+    
+        if request.POST.get('country') and Country.objects.filter(name = request.POST.get('country')).exists():
+            country=Country.objects.get (name = request.POST.get('country'))
+            data['country'] = Country.id
+            
+        if request.POST.get('language') and Language.objects.filter(name = request.POST.get('language')).exists():
+            languaje=Language.objects.get (name = request.POST.get('language'))    
+            data['language'] = Language.id
+            
+        form = UserProfileForm(data,request.POST, request.FILES , instance=request.user.profile)
+        if form.is_valid():
+            form.save()
+            return redirect('profile')
+    else:
+        context ={
+            'errors': form.errors,
+            'languages' : Language.objects.all(),
+            'countries' : Country.objects.all(),          
+        }
+        return render (request , 'users/user_profile.html', context=context)
+
+
+
+
+        
+  
 
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
