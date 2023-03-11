@@ -1,5 +1,5 @@
 from django.shortcuts import render ,redirect
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, authenticate
 from users.forms import RegisterForm , UserProfileForm
 
@@ -52,7 +52,7 @@ def users_list_view(request):
  
     
     
-def users_profile_view(request):
+def user_profile_view(request):
     if request.method == 'GET':
         context = {
             'languages': Language.objects.all(),
@@ -63,17 +63,18 @@ def users_profile_view(request):
     
         data = request.POST.copy()
     
-        if request.POST.get('country') and Country.objects.filter(name = request.POST.get('country')).exists():
-            country=Country.objects.get (name = request.POST.get('country'))
+        if request.POST.get('country')and Country.objects.filter(name = request.POST.get('country')).exists():
             data['country'] = Country.id
             
-        if request.POST.get('language') and Language.objects.filter(name = request.POST.get('language')).exists():
-            languaje=Language.objects.get (name = request.POST.get('language'))    
+        if request.POST.get('language')and Language.objects.filter(name = request.POST.get('language')).exists():
+            languaje = Language.objects.get(name = request.POST.get('language'))    
             data['language'] = Language.id
             
-        form = UserProfileForm(data,request.POST, request.FILES , instance=request.user.profile)
+        form = UserProfileForm(data,request.FILES,instance=request.user.profile)
+        
         if form.is_valid():
             form.save()
+            
             return redirect('profile')
     else:
         context ={
@@ -83,10 +84,7 @@ def users_profile_view(request):
         }
         return render (request , 'users/user_profile.html', context=context)
 
-
-
-
-        
+     
   
 
 @receiver(post_save, sender=User)
