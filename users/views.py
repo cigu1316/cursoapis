@@ -38,7 +38,7 @@ def register(request):
         form =RegisterForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('index')
+            return redirect('login')
         else:
             context = {
                 'errors': form.errors,
@@ -74,7 +74,7 @@ def user_profile_view(request):
         
         if form.is_valid():
             form.save()
-            
+            print('errors')
             return redirect('profile')
     else:
         context ={
