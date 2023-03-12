@@ -8,7 +8,7 @@ from django.dispatch  import receiver
 from django.contrib.auth.models import User
 from users.models import UserProfile
 from admin_settings.models import Language, Country
-
+import requests
 
 def login_view(request):
     

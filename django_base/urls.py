@@ -13,6 +13,6 @@ urlpatterns = [
     path('coins/', include('coins.urls')), 
     path('portfolio/', include('coins.urls')), 
     path('wallet/', include('coins.urls')),
-    
+    path('news/', include('news.urls')),
      
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
