@@ -1,11 +1,11 @@
 
 from django.shortcuts import HttpResponse
 from django_base.settings import NEWS_API_KEY
-import requests
+
 from news.models import News
 
 def fetch_news(request):
-    response = requests.get(f'https://newsapi.org/v2/everything?q=bitcoin&apiKey={NEWS_API_KEY}')
+    response = request.get(f'https://newsapi.org/v2/everything?q=bitcoin&apiKey={NEWS_API_KEY}')
     if response.status_code != 200:
             return HttpResponse(response.status_code)
     response = response.json()
@@ -28,3 +28,5 @@ def fetch_news(request):
             count += 1
             
     return HttpResponse('News fetched:  ' + str(count))
+
+

@@ -9,6 +9,7 @@ from django.contrib.auth.models import User
 from users.models import UserProfile
 from admin_settings.models import Language, Country
 import requests
+from news.utils import get_random_news
 
 def login_view(request):
     
@@ -49,14 +50,16 @@ def register(request):
 def users_list_view(request):
     return render(request, 'users/users_list.html')
 
- 
-    
+  
     
 def user_profile_view(request):
     if request.method == 'GET':
+        main_news, other_news = get_random_news()
         context = {
             'languages': Language.objects.all(),
             'countries': Country.objects.all(),
+            'main_news': main_news,
+            'other_news': other_news,
         }
         return render(request, 'users/user_profile.html', context=context)
     elif request.method == 'POST':
