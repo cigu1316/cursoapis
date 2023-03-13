@@ -4,7 +4,6 @@ from news.models import News
 def get_random_news():
     all_news = News.objects.all()
     selected_news = random.choices(all_news, k=4)
-    return (selected_news[0],selected_news[4:])
+    return selected_news[0],selected_news[1],selected_news[2],selected_news[3]
 
 
-#return (selected_news[0].title, selected_news[0].url_to_news)

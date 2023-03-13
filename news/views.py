@@ -3,7 +3,7 @@ import requests
 from django.shortcuts import HttpResponse
 from django_base.settings import NEWS_API_KEY
 
-from news.models import News
+from news.models import News 
 
 def fetch_news(request):
     response = request.get(f'https://newsapi.org/v2/everything?q=bitcoin&apiKey={NEWS_API_KEY}')
@@ -26,9 +26,13 @@ def fetch_news(request):
                 url_to_news=article['url'], url_to_image=article['urlToImage'], 
                 published_at=article['publishedAt']))
             count += 1
-            
+                          
         print(f'--- {time.time() - start_time} seconds ---')   
         News.objects.bulk_create(news_to_create)
-    return HttpResponse('News fetched:  ' + str(count))
+         
+ 
+        return HttpResponse('News fetched:  ' + str(count))
+
+
 
 

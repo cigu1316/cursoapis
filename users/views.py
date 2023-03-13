@@ -54,12 +54,14 @@ def users_list_view(request):
     
 def user_profile_view(request):
     if request.method == 'GET':
-        main_news, other_news = get_random_news()
+        main_news, other_news , other_news1 ,other_news2 = get_random_news()
         context = {
             'languages': Language.objects.all(),
             'countries': Country.objects.all(),
             'main_news': main_news,
             'other_news': other_news,
+            'other_news1': other_news1,
+            'other_news2': other_news2,
         }
         return render(request, 'users/user_profile.html', context=context)
     elif request.method == 'POST':

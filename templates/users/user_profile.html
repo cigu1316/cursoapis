@@ -77,26 +77,39 @@
 								<div class="card">
 									<div class="card-body">
 										<div class="profile-news">
+
+
 											<h5 class="text-primary d-inline">Our Latest News</h5>
 											<div class="media pt-3 pb-3">
-												<img src="images/profile/5.jpg" alt="image" class="mr-3 rounded" width="75">
+											<img src="{{other_news.url_to_image}}" alt="image" class="mr-3 rounded" width="75">
+											<div class="media-body">
+											<h5 class="m-b-5"><a href="{{other_news.url_to_news}}" target="_blank"class="text-black">{{other_news.title}}</a></h5>
+											<p class="mb-0">{{other_news.description}}</p>
+
+
+												</div>
+											</div>
+											<div class="media pt-3 pb-3">
+
+
+
+												<img src="{{other_news1.url_to_image}}" alt="image" class="mr-3 rounded" width="75">
 												<div class="media-body">
-													<h5 class="m-b-5"><a href="post-details.html" class="text-black">Collection of textile samples</a></h5>
+													<h5 class="m-b-5"><a href="{{other_news1.url_to_news}}" target="_blank"class="text-black">{{other_news1.title}}</a></h5>
 													<p class="mb-0">I shared this on my fb wall a few months back, and I thought.</p>
 												</div>
 											</div>
 											<div class="media pt-3 pb-3">
-												<img src="images/profile/6.jpg" alt="image" class="mr-3 rounded" width="75">
+
+
+
+												<img src="{{other_news2.url_to_image}}" alt="image" class="mr-3 rounded" width="75">
 												<div class="media-body">
-													<h5 class="m-b-5"><a href="post-details.html" class="text-black">Collection of textile samples</a></h5>
-													<p class="mb-0">I shared this on my fb wall a few months back, and I thought.</p>
-												</div>
-											</div>
-											<div class="media pt-3 pb-3">
-												<img src="images/profile/7.jpg" alt="image" class="mr-3 rounded" width="75">
-												<div class="media-body">
-													<h5 class="m-b-5"><a href="post-details.html" class="text-black">Collection of textile samples</a></h5>
-													<p class="mb-0">I shared this on my fb wall a few months back, and I thought.</p>
+												<h5 class="m-b-5"><a href="{{other_news2.url_to_news}}" target="_blank" class="text-black">{{other_news2.title}}</a></h5>
+												<p class="mb-0">{{other_news2.description}}</p>
+
+
+
 												</div>
 											</div>
 										</div>
