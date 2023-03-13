@@ -1,4 +1,5 @@
-
+import time
+import requests
 from django.shortcuts import HttpResponse
 from django_base.settings import NEWS_API_KEY
 
@@ -10,23 +11,24 @@ def fetch_news(request):
             return HttpResponse(response.status_code)
     response = response.json()
     count = 0 
+    start_time = time.time()
+    news_to_create = []
     for article in response['articles']:
         
         
         if all([article['title'],
-            article['description'], 
-            article['url'], 
-            article['urlToImage'], 
-            article['publishedAt']]):
-            News.objects.create(
-                title=article['title'],
-                description=article['description'],
-                url_to_news=article['url'],
-                url_to_image=article['urlToImage'],
-                published_at=article['publishedAt']
-                                    )
+                    article['description'], 
+                    article['url'], 
+                    article['urlToImage'], 
+                    article['publishedAt']]):
+            
+            news_to_create.append(News(title=article['title'],description=article['description'],
+                url_to_news=article['url'], url_to_image=article['urlToImage'], 
+                published_at=article['publishedAt']))
             count += 1
             
+        print(f'--- {time.time() - start_time} seconds ---')   
+        News.objects.bulk_create(news_to_create)
     return HttpResponse('News fetched:  ' + str(count))
 
 
