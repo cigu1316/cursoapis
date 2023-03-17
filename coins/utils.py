@@ -1,8 +1,8 @@
 from django.utils import timezone
-from coins.models import Transaction
+from coins.models import Transaction ,Coin
 from datetime import timedelta
 import random
-from coins.models import Coin
+
 
 def generate_price():
     return random.randint(10000 , 30000) * random.random()
