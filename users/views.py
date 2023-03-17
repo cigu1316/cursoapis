@@ -45,12 +45,9 @@ def register(request):
                 'errors': form.errors,
                 }
             return render(request, 'users/register.html', context)
-    
 
 def users_list_view(request):
     return render(request, 'users/users_list.html')
-
-  
     
 def user_profile_view(request):
     if request.method == 'GET':
@@ -89,10 +86,9 @@ def user_profile_view(request):
         }
         return render (request , 'users/user_profile.html', context=context)
 
-     
-  
-
+   
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
         UserProfile.objects.create(user=instance)
+

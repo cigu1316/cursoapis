@@ -12,10 +12,9 @@ class RegisterForm(UserCreationForm):
         fields = ['username', 'email' , 'first_name', 'last_name', 'password1', 'password2']
     
 class UserProfileForm(forms.ModelForm):
-    
-    class Meta:
-        model = UserProfile
-        fields = ['phone_number', 'profile_image', 'cover_image', 'occupation',\
-            'description', 'availability', 'birth_date', 'years_of_experience',\
-                'company_name', 'address' , 'language', 'country',]
         
+        class Meta:
+            model = UserProfile
+            
+            fields = ['phone_number', 'profile_image', 'cover_image', 'occupation','description' ,\
+                'availability', 'birth_date', 'years_of_experience','company_name', 'address' , 'language', 'country',]
