@@ -76,7 +76,7 @@ class Coin(models.Model):
         current_week_price , last_day= self.get_performance_of_week(last_day)
         last_week_price , last_day = self.get_performance_of_week(last_day)
         print(current_week_price,last_week_price)
-        return ((current_week_price - last_week_price)/(last_week_price)) * 100
+        return round(((current_week_price - last_week_price)/(last_week_price)) * 100,2)
    
                
 class Transaction(models.Model):
