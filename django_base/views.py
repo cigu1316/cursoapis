@@ -14,5 +14,6 @@ def index(request):
         'graph_data': json.dumps(get_five_days_data()),
         'recents_transactions': get_recent_transactions(),
         'coins': Coin.objects.all(),
+        
     }
     return render(request, 'index.html', context=context)

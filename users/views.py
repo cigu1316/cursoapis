@@ -10,6 +10,8 @@ from users.models import UserProfile
 from admin_settings.models import Language, Country
 import requests
 from news.utils import get_random_news
+from django.contrib.auth.decorators import login_required 
+
 
 def login_view(request):
     
@@ -46,9 +48,7 @@ def register(request):
                 }
             return render(request, 'users/register.html', context)
 
-def users_list_view(request):
-    return render(request, 'users/users_list.html')
-    
+
 def user_profile_view(request):
     if request.method == 'GET':
         main_news, other_news , other_news1 ,other_news2 = get_random_news()
@@ -92,4 +92,34 @@ def user_profile_view(request):
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
         UserProfile.objects.create(user=instance)
+        
+        
+        
+        
+@login_required
+def users_list_view(request):
+    if not request.user.is_superuser:
+        return redirect('index')
+    context ={
+    'users' :User.objects.exclude(id=request.user.id)
+    }
+    return render(request, 'users/users_list.html',context=context)
 
+
+@login_required
+def block_user_view(request,pk):
+    if not request.user.is_superuser:
+        return redirect('index')
+    user = User.objects.get(id=pk)
+    user.is_active = not user.is_active
+    user.save()
+    return redirect('list')
+    
+    
+@login_required
+def delete_user_view(request,pk):
+    if not request.user.is_superuser:
+        return redirect('index')
+    User.objects.get(id=pk).delete()
+    return redirect('list')
+     

@@ -1,5 +1,4 @@
-from datetime   import timedelta
-
+from datetime import timedelta
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import MinValueValidator, MaxValueValidator
@@ -26,6 +25,7 @@ class Card(models.Model):
     bank_name = models.CharField(max_length=80)
     valid_date = models.CharField(max_length=40)
     color= models.CharField(max_length=7, choices=CHOISES , default='purple')
+    balance = models.FloatField(default=15000)
     
     def __str__(self):
         return self.card_name
@@ -75,7 +75,7 @@ class Coin(models.Model):
         last_day = self.get_last_day()
         current_week_price , last_day= self.get_performance_of_week(last_day)
         last_week_price , last_day = self.get_performance_of_week(last_day)
-        print(current_week_price,last_week_price)
+        (current_week_price,last_week_price)
         return round(((current_week_price - last_week_price)/(last_week_price)) * 100,2)
    
                

@@ -1,6 +1,6 @@
 from django.urls import path
-from users.views import login_view, register ,users_list_view , user_profile_view
-from django.contrib.auth.views import LogoutView
+from users.views import login_view, register ,users_list_view , user_profile_view,block_user_view,delete_user_view
+from django.contrib.auth.views import LogoutView 
 
 
 urlpatterns = [    
@@ -11,6 +11,8 @@ urlpatterns = [
     path('list/', users_list_view, name='list'),
     
     path('profile/', user_profile_view , name='profile'),
+    path('block/<int:pk>/', block_user_view, name='block'),
+    path('delete/<int:pk>/', delete_user_view, name='delete')
    
     
 ]

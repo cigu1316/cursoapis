@@ -97,7 +97,7 @@
                             </li>
                             <li class="nav-item dropdown header-profile">
                                 <a class="nav-link" href="#" role="button" data-toggle="dropdown">
-                                    <img src="{{request.user.profile.image.url}}" width="20" alt="">
+                                    <img src="{{user.profile.profile_image.url}}" width="20" alt="">
 									<div class="header-info">
 										<span>{{request.user.username}}</span>
 										<small>Super Admin</small>
@@ -135,7 +135,7 @@
             <div class="deznav-scroll">
 				<div class="main-profile">
 					<div class="image-bx">
-						<img src="{{request.user.profile.image.url}}" alt="">
+						<img src="{{request.user.profile.profile_image.url}}" alt="">
 					</div>
 					<h5 class="name"><span class="font-w400">Hola,</span> {{request.user.first_name}}</h5>
 					<h6 class="name"><span class="font-w400">{{request.user.email}}</span> </h6>
@@ -157,11 +157,14 @@
 
 						</ul>
                     </li>
-                    <li><a class="ai-icon" href="/users/list/" aria-expanded="false">
-						<i class="flaticon-077-menu-1"></i>
-							<span class="nav-text">Users</span>
-						</a>
-                    </li>
+                   
+                    {% if request.user.is_superuser %}
+                        <li><a class="ai-icon" href="/users/list/" aria-expanded="false">
+                            <i class="flaticon-077-menu-1"></i>
+                                <span class="nav-text">Users</span>
+                            </a>
+                        </li>
+                    {% endif %}
                 </ul>
 				<div class="copyright">
 					<p><strong>Zenix Crypto Admin Dashboard</strong> © 2023 All Rights Reserved</p>
@@ -215,6 +218,7 @@
 	<script src="{% static 'js/dashboard/dashboard-1.js' %}"></script>
 	
 	<script src="{% static 'vendor/owl-carousel/owl.carousel.js' %}"></script>
+    <script src="{% static 'js/dashboard/wallet.js' %}"></script>
     <script src="{% static 'js/custom.min.js' %}"></script>
 	<script src="{% static 'js/deznav-init.js' %}"></script>
     <script src="{% static 'js/demo.js' %}"></script>

@@ -4,6 +4,7 @@ from datetime import timedelta
 import random
 
 
+
 def generate_price():
     return random.randint(10000 , 30000) * random.random()
     
@@ -13,8 +14,7 @@ def generate_amount():
 def generate_transaction_type():
     return random.choice(['buy', 'sell'])   
 
-def generate_transactions():    
-  
+def generate_transactions():   
     transactions_to_create = []
     for coin in Coin.objects.all():
         today = timezone.now()
@@ -33,17 +33,13 @@ def generate_transactions():
     return transactions_to_create
 
 def get_five_days_data():
-    context={
-        'data':[]
-    }
+    context={ 'data':[]  }
     date_array=[Transaction.get_last_day()]
     for i in range(1 ,5):
         date_array.append((date_array[0] -timedelta(days=i)).strftime('%d/%m'))
     date_array[0]=date_array[0].strftime('%d/%m')
     date_array=date_array[::-1]
     context['dates'] = date_array
-    
-   
     for coin in Coin.objects.all():
         context['data'].append(
             {
@@ -57,3 +53,7 @@ def get_five_days_data():
 def get_recent_transactions():
     since_day = Transaction.get_last_day() - timedelta(days=2)
     return random.choices(Transaction.objects.filter(date__gte=since_day), k=6) #date >= since_day (Greater than or equal to)
+
+#def  summary
+    
+    
