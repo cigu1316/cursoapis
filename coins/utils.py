@@ -54,6 +54,5 @@ def get_recent_transactions():
     since_day = Transaction.get_last_day() - timedelta(days=2)
     return random.choices(Transaction.objects.filter(date__gte=since_day), k=6) #date >= since_day (Greater than or equal to)
 
-#def  summary
-    
+
     

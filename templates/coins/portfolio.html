@@ -3,7 +3,7 @@
 
 
 {% block content %}
-		<!--**********************************
+				<!--**********************************
             Content body start
         ***********************************-->
         <div class="content-body">
@@ -33,6 +33,10 @@
 										</div>
 									</div>
 									<div class="card-body">
+
+
+
+
 										<div class="bg-success coin-holding flex-wrap">
 											<div class="mb-2 coin-bx">
 												<div class="d-flex align-items-center">
@@ -210,6 +214,10 @@
 												</div>
 											</div>
 										</div>
+
+
+
+
 									</div>
 								</div>
 							</div>
@@ -222,13 +230,13 @@
 									<div class="card-header border-0">
 										<h4 class="mb-0 text-black fs-20">My Profile</h4>
 									</div>
-									<div class="card-body">
+										<div class="card-body">
 										<div class="text-center">
 											<div class="my-profile">
 												<img src="{{request.user.profile.profile_image.url}}" alt="" class="rounded">
 											</div>
-											<h4 class="mt-3 font-w600 text-black mb-0 name-text">{{request.user.username}}</h4>
-											<p class="mb-0 mt-2">{{user.profile.birth_date}}</p>
+											<h4 class="mt-3 font-w600 text-black mb-0 name-text">{{request.user.get_full_name}}</h4>
+											<p class="mb-0 mt-2">{{request.user.date_joined}}</p>
 										</div>
 										<ul class="portfolio-social">
 											<li><a href="tel:{{request.user.profile.phone}}"><i class="fa fa-phone"></i></a></li>

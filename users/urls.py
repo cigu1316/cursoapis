@@ -1,5 +1,5 @@
 from django.urls import path
-from users.views import login_view, register ,users_list_view , user_profile_view,block_user_view,delete_user_view
+from users.views import login_view, register ,users_list_view , user_profile_view , block_user_view , delete_user_view
 from django.contrib.auth.views import LogoutView 
 
 

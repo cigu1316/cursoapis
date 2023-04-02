@@ -15,7 +15,7 @@ class Card(models.Model):
         ('orange', 'orange'),
             
     ]
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE , related_name='cards')
     card_name = models.CharField(max_length=40)
     card_holder= models.CharField(max_length=60)
     card_number = models.IntegerField(validators=[ 
@@ -23,7 +23,7 @@ class Card(models.Model):
                                                  MaxValueValidator(4399999999999999)
                                                  ])
     bank_name = models.CharField(max_length=80)
-    valid_date = models.CharField(max_length=40)
+    valid_date = models.DateTimeField(max_length=5, default= 'mm/yy')
     color= models.CharField(max_length=7, choices=CHOISES , default='purple')
     balance = models.FloatField(default=15000)
     
@@ -78,7 +78,12 @@ class Coin(models.Model):
         (current_week_price,last_week_price)
         return round(((current_week_price - last_week_price)/(last_week_price)) * 100,2)
    
-               
+            
+    def get_lasts_transactions(self):
+        if self.transactions.count() == 0:
+            return []
+        return self.transactions.order_by('-date')[:7]
+           
 class Transaction(models.Model):
     
     CHOISES= [
@@ -98,3 +103,7 @@ class Transaction(models.Model):
     @classmethod
     def  get_last_day(cls):
         return cls.objects.all().order_by('-date').first().date.date()
+    
+    def get_total_price(self):
+        
+        return round(self.price * self.amount, 2)

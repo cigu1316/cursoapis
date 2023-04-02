@@ -122,4 +122,3 @@ def delete_user_view(request,pk):
         return redirect('index')
     User.objects.get(id=pk).delete()
     return redirect('list')
-     
